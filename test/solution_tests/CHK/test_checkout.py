@@ -19,6 +19,8 @@ def test_simple(skus: str, value: int):
     assert checkout(skus) == value
 
 
+def test_offers(skus: str, expected: int):
+    assert checkout(skus) == expected
 
 
 @pytest.mark.parametrize(
@@ -75,4 +77,5 @@ def test_simple(skus: str, value: int):
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 

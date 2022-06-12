@@ -19,7 +19,8 @@ from solutions.CHK.checkout_solution import checkout
     [
         (123, -1),
         # Im assuming empty strings are illegal, not 0
-        ("", -1),
+        # well i was wrong
+        ("", 0),
         ("A", 50),
         (" A", 50),
         ("A ", 50),
@@ -34,6 +35,8 @@ from solutions.CHK.checkout_solution import checkout
         ("AA", 100),
         ("AB", 80),
         ("BC", 50),
+        ("ABCa", -1),
+        ("aABC", -1),
         ("aBcD", -1),
         ("ABCDe", -1),
         ("BB", 45),
@@ -47,6 +50,7 @@ from solutions.CHK.checkout_solution import checkout
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 
 
 

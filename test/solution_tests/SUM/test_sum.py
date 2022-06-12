@@ -36,7 +36,3 @@ def test_sum(x: Number, y: Number, err: bool):
 
     with pytest.raises(ValueError):
         sum(x, y)
-
-
-
-

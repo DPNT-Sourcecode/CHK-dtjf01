@@ -1,19 +1,25 @@
 import pytest
 
-from solutions.CHK.checkout_solution import checkout
+from solutions.CHK.checkout_solution import (
+    checkout, PRICES, OFFERS, SUBS
+)
 
 
-'''
-+------+-------+------------------------+
-| Item | Price | Special offers         |
-+------+-------+------------------------+
-| A    | 50    | 3A for 130, 5A for 200 |
-| B    | 30    | 2B for 45              |
-| C    | 20    |                        |
-| D    | 15    |                        |
-| E    | 40    | 2E get one B free      |
-+------+-------+------------------------+
-'''
+@pytest.mark.parametrize(
+    "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd"]
+)
+def test_illegals(skus: str):
+    assert checkout(skus) == -1
+
+
+@pytest.mark.parametrize(
+    "skus, value", [(k, v) for k, v in PRICES.items()]
+)
+def test_simple(skus: str, value: int):
+    assert checkout(skus) == value
+
+
+
 
 @pytest.mark.parametrize(
     "skus,expected",
@@ -69,3 +75,4 @@ from solutions.CHK.checkout_solution import checkout
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+

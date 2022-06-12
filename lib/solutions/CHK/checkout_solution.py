@@ -1,4 +1,8 @@
 
+
+from collections import defaultdict
+
+
 PRICES = {
     "A": 50,
     "B": 30,
@@ -21,12 +25,17 @@ def checkout(skus: str) -> int:
     if any([s not in PRICES for s in s_skus]):
         return -1
 
+    groups = defaultdict(int)
+    for s in s_skus:
+        groups[s] = groups.get(s, 0) + 1
+
     # combine offers of SKUs
 
     # calc price
     total = sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 
 
 

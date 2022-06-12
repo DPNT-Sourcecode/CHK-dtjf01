@@ -3,12 +3,13 @@ import pytest
 import random
 
 from solutions.CHK.checkout_solution import (
-    checkout, PRICES, OFFERS, SUBS
+    checkout, PRICES
 )
 
 
 @pytest.mark.parametrize(
-    "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd"]
+    "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd", "ABCa", 
+             "aABC", "aBcD", "ABCDe",]
 )
 def test_illegals(skus: str):
     assert checkout(skus) == -1
@@ -62,29 +63,9 @@ def test_subs(skus: str, expected: int):
 @pytest.mark.parametrize(
     "skus,expected",
     [
-        (123, -1),
-        ("", 0),
-        ("A", 50),
-        (" A", 50),
-        ("A ", 50),
-        ("B", 30),
-        ("C", 20),
-        ("D", 15),
-        ("E", 40),
-        ("F", 10),
-        ("a", -1),
-        ("b", -1),
-        ("c", -1),
-        ("d", -1),
-        ("e", -1),
-        ("f", -1),
         ("AA", 100),
         ("AB", 80),
         ("BC", 50),
-        ("ABCa", -1),
-        ("aABC", -1),
-        ("aBcD", -1),
-        ("ABCDe", -1),
         ("BB", 45),
         ("ABB", 95),
         ("AAA", 130),
@@ -104,18 +85,10 @@ def test_subs(skus: str, expected: int):
         ("ABBEEBB", 50 + 30 + 80 + 45),
         ("BBEEBBEE", 160 + 45),
 
-        ("FFF", 20),
-        ("FF", 20),
         ("FFFF", 30),
         ("AFFAAF", 130 + 20),
         ("AAAFFFBB", 130 + 20 + 45)
     ]
 )
-def test_checkout(skus: str, expected: int):
+def test_combos(skus: str, expected: int):
     assert checkout(skus) == expected
-
-
-
-
-
-

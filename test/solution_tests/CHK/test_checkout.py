@@ -20,9 +20,20 @@ from solutions.CHK.checkout_solution import checkout
         ("A", 50),
         ("B", 30),
         ("C", 20),
-        ("D", 15)
+        ("D", 15),
+        ("a", 50),
+        ("b", 30),
+        ("c", 20),
+        ("d", 15),
+        ("E", -1),
+        ("AA", 100),
+        ("AB", 80),
+        ("BC", 50),
+        ("aBcD", 115),
+        ("ABCDe", -1)
     ]
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 

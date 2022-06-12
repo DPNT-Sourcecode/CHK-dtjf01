@@ -62,6 +62,7 @@ SUBS = {
     "UUUU": "U"
 }
 
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
@@ -89,4 +90,5 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 

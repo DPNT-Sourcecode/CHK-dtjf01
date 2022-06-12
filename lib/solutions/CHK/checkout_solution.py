@@ -1,8 +1,4 @@
 
-
-from collections import defaultdict
-
-
 PRICES = {
     "A": 50,
     "B": 30,
@@ -42,5 +38,6 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 
 

@@ -47,8 +47,12 @@ OFFERS = {
 COMBO_OFFERS = sorted(set(
     "".join(sorted(combo))
     for combo in itertools.combinations_with_replacement("STXYZ", 3)
-), key=lambda c: "X" in c)
+), key=lambda c: sum([PRICES[ci] for ci in c]), reverse=True)
 
+
+OFFERS.update(
+    {combo: 45 for combo in COMBO_OFFERS}
+)
 
 SUBS = {
     "EE": "B",
@@ -73,10 +77,6 @@ def checkout(skus: str) -> int:
     if any([s not in PRICES for s in s_skus]):
         return -1
 
-    # groups offers, 3 items from set -> 45
-    # always favour putting expensive items in the list
-
-
     for k, v in SUBS.items():
         subc = s_skus.count(k)
         s_skus = s_skus.replace(v, "", subc)
@@ -90,6 +90,7 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 
 
 

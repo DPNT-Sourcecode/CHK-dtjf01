@@ -1,4 +1,5 @@
 import pytest
+import itertools
 
 import random
 
@@ -38,6 +39,13 @@ COMBOS = [
     ("P"*5 + "H"*5, 200 + 45),
     ("RRRQQQ", 150 + 60)
 ]
+
+COMBO_OFFERS = {
+    "".join(combo): 45
+    for combo in itertools.combinations(
+        "STXYZ", 3
+    )
+}
 
 
 @pytest.mark.parametrize(
@@ -107,4 +115,5 @@ def test_combos_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
+
 

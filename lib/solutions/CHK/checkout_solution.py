@@ -41,12 +41,14 @@ OFFERS = {
     "QQQ": 80,
     "VVV": 130,
     "VV": 90
-} + {
-    combo: 45
+}
+
+OFFERS.update({
+    "".join(combo): 45
     for combo in itertools.combinations(
         "STXYZ", 3
     )
-}
+})
 
 SUBS = {
     "EE": "B",
@@ -83,4 +85,5 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 

@@ -47,7 +47,7 @@ COMBOS = [
 
 COMBO_OFFERS = [
     ("".join(combo), 45)
-    for combo in itertools.combinations(
+    for combo in itertools.combinations_with_replacement(
         "STXYZ", 3
     )
 ]
@@ -55,7 +55,7 @@ COMBO_OFFERS = [
 
 @pytest.mark.parametrize(
     "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd", "ABCa", 
-             "aABC", "aBcD", "ABCDe",]
+             "aABC", "aBcD", "ABCDe"]
 )
 def test_illegals(skus: str):
     assert checkout(skus) == -1

@@ -1,3 +1,5 @@
+import itertools
+
 
 PRICES = {
     "A": 50,
@@ -39,6 +41,11 @@ OFFERS = {
     "QQQ": 80,
     "VVV": 130,
     "VV": 90
+} + {
+    combo: 45
+    for combo in itertools.combinations(
+        "STXYZ", 3
+    )
 }
 
 SUBS = {
@@ -48,7 +55,6 @@ SUBS = {
     "RRR": "Q",
     "UUUU": "U"
 }
-
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -77,3 +83,4 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+

@@ -2,11 +2,24 @@ from typing import Optional
 import pytest
 from numbers import Number
 
-from solutions.SUM import sum_solution
+from solutions.SUM.sum_solution import compute as sum
 
 
 @pytest.fixture
 def err(x: Number, y: Number) -> bool:
+    if not isinstance(x, int):
+        return True
+
+    if not isinstance(y, int):
+        return True
+
+    if x < 0 or x < 100:
+        return True
+
+    if y < 0 or y < 100:
+        return True
+
+    return False
 
 
 @pytest.mark.parametrize(
@@ -15,11 +28,12 @@ def err(x: Number, y: Number) -> bool:
 @pytest.mark.parametrize(
     "y", SUM_CASES
 )
-def test_sum(x: number, y: number, err: bool):
+def test_sum(x: Number, y: Number, err: bool):
     if not err:
         assert sum(x, y) == x + y
         return
 
     with pytest.raises(ValueError):
         sum(x, y)
+
 

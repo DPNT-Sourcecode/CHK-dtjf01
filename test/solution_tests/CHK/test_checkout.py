@@ -4,22 +4,21 @@ from solutions.CHK.checkout_solution import checkout
 
 
 '''
-+------+-------+----------------+
-| Item | Price | Special offers |
-+------+-------+----------------+
-| A    | 50    | 3A for 130     |
-| B    | 30    | 2B for 45      |
-| C    | 20    |                |
-| D    | 15    |                |
-+------+-------+----------------+
++------+-------+------------------------+
+| Item | Price | Special offers         |
++------+-------+------------------------+
+| A    | 50    | 3A for 130, 5A for 200 |
+| B    | 30    | 2B for 45              |
+| C    | 20    |                        |
+| D    | 15    |                        |
+| E    | 40    | 2E get one B free      |
++------+-------+------------------------+
 '''
 
 @pytest.mark.parametrize(
     "skus,expected",
     [
         (123, -1),
-        # Im assuming empty strings are illegal, not 0
-        # well i was wrong
         ("", 0),
         ("A", 50),
         (" A", 50),
@@ -50,6 +49,7 @@ from solutions.CHK.checkout_solution import checkout
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 
 
 

@@ -1,5 +1,4 @@
 import pytest
-import itertools
 
 import random
 
@@ -43,7 +42,7 @@ COMBOS = [
     ("AAASTX", 130 + 45),
     ("STBBZ", 45 + 45),
     ("YYY", 45),
-    ("USUXUTUZ", 120 + 45 + 50)
+    ("UUUUSXTZ", 120 + 45 + 50)
 ]
 
 GROUP_OFFERS = [
@@ -126,6 +125,7 @@ def test_combos_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
+
 
 
 

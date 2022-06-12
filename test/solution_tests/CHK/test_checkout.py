@@ -4,7 +4,7 @@ import itertools
 import random
 
 from solutions.CHK.checkout_solution import (
-    checkout, PRICES
+    COMBO_OFFERS, checkout, PRICES
 )
 
 
@@ -45,11 +45,9 @@ COMBOS = [
     ("YYY", 45)
 ]
 
-COMBO_OFFERS = [
+GROUP_OFFERS = [
     ("".join(combo), 45)
-    for combo in itertools.combinations_with_replacement(
-        "STXYZ", 3
-    )
+    for combo in COMBO_OFFERS
 ]
 
 
@@ -84,8 +82,8 @@ def test_simple(skus: str, value: int):
     ]
 )
 def test_offers(skus: str, expected: int):
-    # randomly add 'Y' and scramble the input
-    extra = "Y" * random.randint(1, 5)
+    # randomly add 'D' and scramble the input
+    extra = "D" * random.randint(1, 5)
     skus = list(skus + extra)
     random.shuffle(skus)
 
@@ -114,9 +112,17 @@ def test_combos(skus: str, expected: int):
 
 
 @pytest.mark.parametrize(
+    "skus,expected", GROUP_OFFERS
+)
+def test_combos(skus: str, expected: int):
+    assert checkout(skus) == expected
+
+
+@pytest.mark.parametrize(
     "skus,expected", COMBOS
 )
 def test_combos_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
+

@@ -43,7 +43,8 @@ OFFERS = {
     "VV": 90
 }
 
-COMBO_OFFERS = list(
+# get unique set of group permutations
+COMBO_OFFERS = set(
     "".join(sorted(combo))
     for combo in itertools.combinations_with_replacement("STXYZ", 3)
 )
@@ -88,3 +89,4 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+

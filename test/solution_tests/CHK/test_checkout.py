@@ -31,11 +31,9 @@ from solutions.CHK.checkout_solution import checkout
         ("BC", 50),
         ("aBcD", 115),
         ("ABCDe", -1),
-        ("BB", 45)
+        ("BB", 45),
+        ("ABB", 95)
     ]
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
-
-
-

@@ -20,24 +20,17 @@ OFFERS = {
 # skus = unicode string
 def checkout(skus: str) -> int:
     # sort the string into groups of SKUs
-    s_skus = sorted(skus.upper())
-    # if any invalue value -> return -1
+    s_skus = "".join(sorted(skus.upper()))
+    # if any invalid value -> return -1
     if any([s not in PRICES for s in s_skus]):
         return -1
 
-    groups = defaultdict(int)
-    for s in s_skus:
-        groups[s] = groups.get(s, 0) + 1
+    total = 0
+    for k, v in OFFERS.items():
+        total += s_skus.count(k) * v
+        s_skus.replace(k, "")
 
-    # combine offers of SKUs
-
-    # calc price
-    total = sum([PRICES[s] for s in s_skus])
+    # calc price of remaining
+    total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
-
-
-
-
-
-

@@ -17,6 +17,7 @@ from solutions.CHK.checkout_solution import checkout
 @pytest.mark.parametrize(
     "skus,expected",
     [
+        ("", -1),
         ("A", 50),
         ("B", 30),
         ("C", 20),
@@ -32,8 +33,14 @@ from solutions.CHK.checkout_solution import checkout
         ("aBcD", 115),
         ("ABCDe", -1),
         ("BB", 45),
-        ("ABB", 95)
+        ("ABB", 95),
+        ("AAA", 130),
+        ("AAAB", 160),
+        ("AAABB", 175),
+        ("ABCABCA", 130 + 45 + 20 + 20),
+        ("")
     ]
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+

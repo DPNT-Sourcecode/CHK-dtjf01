@@ -7,6 +7,39 @@ from solutions.CHK.checkout_solution import (
 )
 
 
+COMBOS = [
+    ("AA", 100),
+    ("AB", 80),
+    ("BC", 50),
+    ("BB", 45),
+    ("ABB", 95),
+    ("AAA", 130),
+    ("AAAAA", 200),
+    ("AAAAAA", 250),
+    ("AAAB", 160),
+    ("AAABB", 175),
+    ("AAABBAA", 245),
+    ("AABBAAB", 130 + 50 + 45 + 30),
+    ("AABBAAAB", 200 + 45 + 30),
+    ("ABCABCA", 130 + 45 + 20 + 20),
+    ("CCCDAABDDCB", 80 + 45 + 100 + 45),
+    ("EEB", 80),
+    ("ABCDEE", 50 + 0 + 20 + 15 + 80),
+    ("BBEE", 30 + 80),
+    ("AAAAABBEE", 200 + 30 + 80),
+    ("ABBEEBB", 50 + 30 + 80 + 45),
+    ("BBEEBBEE", 160 + 45),
+
+    ("FFFF", 30),
+    ("AFFAAF", 130 + 20),
+    ("AAAFFFBB", 130 + 20 + 45),
+
+    ("H"*15, 125),
+    ("P"*5 + "H"*5, 200 + 45),
+    ("RRRQQQ", 150 + 60)
+]
+
+
 @pytest.mark.parametrize(
     "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd", "ABCa", 
              "aABC", "aBcD", "ABCDe",]
@@ -61,34 +94,17 @@ def test_subs(skus: str, expected: int):
 
 
 @pytest.mark.parametrize(
-    "skus,expected",
-    [
-        ("AA", 100),
-        ("AB", 80),
-        ("BC", 50),
-        ("BB", 45),
-        ("ABB", 95),
-        ("AAA", 130),
-        ("AAAAA", 200),
-        ("AAAAAA", 250),
-        ("AAAB", 160),
-        ("AAABB", 175),
-        ("AAABBAA", 245),
-        ("AABBAAB", 130 + 50 + 45 + 30),
-        ("AABBAAAB", 200 + 45 + 30),
-        ("ABCABCA", 130 + 45 + 20 + 20),
-        ("CCCDAABDDCB", 80 + 45 + 100 + 45),
-        ("EEB", 80),
-        ("ABCDEE", 50 + 0 + 20 + 15 + 80),
-        ("BBEE", 30 + 80),
-        ("AAAAABBEE", 200 + 30 + 80),
-        ("ABBEEBB", 50 + 30 + 80 + 45),
-        ("BBEEBBEE", 160 + 45),
-
-        ("FFFF", 30),
-        ("AFFAAF", 130 + 20),
-        ("AAAFFFBB", 130 + 20 + 45)
-    ]
+    "skus,expected", COMBOS
 )
 def test_combos(skus: str, expected: int):
     assert checkout(skus) == expected
+
+
+@pytest.mark.parametrize(
+    "skus,expected", COMBOS
+)
+def test_combos_shuffled(skus: str, expected: int):
+    skus = list(skus)
+    random.shuffle(skus)
+    assert checkout("".join(skus)) == expected
+

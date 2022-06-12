@@ -17,8 +17,12 @@ from solutions.CHK.checkout_solution import checkout
 @pytest.mark.parametrize(
     "skus,expected",
     [
+        (123, -1),
+        # Im assuming empty strings are illegal, not 0
         ("", -1),
         ("A", 50),
+        (" A", 50),
+        ("A ", 50),
         ("B", 30),
         ("C", 20),
         ("D", 15),
@@ -37,10 +41,10 @@ from solutions.CHK.checkout_solution import checkout
         ("AAA", 130),
         ("AAAB", 160),
         ("AAABB", 175),
-        ("ABCABCA", 130 + 45 + 20 + 20),
-        ("")
+        ("ABCABCA", 130 + 45 + 20 + 20)
     ]
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 

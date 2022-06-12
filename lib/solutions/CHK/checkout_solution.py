@@ -25,6 +25,10 @@ def checkout(skus: str) -> int:
 
     # sort the string into groups of SKUs
     s_skus = "".join(sorted(skus.upper().strip()))
+
+    if not skus:
+        return -1
+
     # if any invalid value -> return -1
     if any([s not in PRICES for s in s_skus]):
         return -1
@@ -38,4 +42,5 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 

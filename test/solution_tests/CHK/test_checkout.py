@@ -52,7 +52,7 @@ GROUP_OFFERS = [
 
 
 @pytest.mark.parametrize(
-    "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd", "ABCa", 
+    "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd", "ABCa",
              "aABC", "aBcD", "ABCDe"]
 )
 def test_illegals(skus: str):
@@ -125,6 +125,7 @@ def test_combos_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
+
 
 
 

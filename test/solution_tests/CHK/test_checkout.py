@@ -107,13 +107,6 @@ def test_subs(skus: str, expected: int):
 
 
 @pytest.mark.parametrize(
-    "skus,expected", COMBO_OFFERS
-)
-def test_group_offers(skus: str, expected: int):
-    assert checkout(skus) == expected
-
-
-@pytest.mark.parametrize(
     "skus,expected", COMBOS
 )
 def test_combos(skus: str, expected: int):
@@ -127,7 +120,3 @@ def test_combos_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
-
-
-
-

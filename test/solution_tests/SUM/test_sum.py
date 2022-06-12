@@ -4,22 +4,23 @@ from numbers import Number
 
 from solutions.SUM.sum_solution import compute as sum
 
+SUM_CASES = [
+    0, 1, 2, 3, 100,
+    -1, 101,
+    0.1, 0.3, -0.001, 100.001
+]
+
 
 @pytest.fixture
 def err(x: Number, y: Number) -> bool:
-    if not isinstance(x, int):
-        return True
+    err = False
+    if not isinstance(x, int) or x < 0 or x < 100:
+        err = True
 
-    if not isinstance(y, int):
-        return True
+    if not isinstance(y, int) or y < 0 or y < 100:
+        err = True
 
-    if x < 0 or x < 100:
-        return True
-
-    if y < 0 or y < 100:
-        return True
-
-    return False
+    return err
 
 
 @pytest.mark.parametrize(
@@ -35,5 +36,6 @@ def test_sum(x: Number, y: Number, err: bool):
 
     with pytest.raises(ValueError):
         sum(x, y)
+
 
 

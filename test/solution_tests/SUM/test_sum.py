@@ -14,10 +14,10 @@ SUM_CASES = [
 @pytest.fixture
 def err(x: Number, y: Number) -> bool:
     err = False
-    if not isinstance(x, int) or x < 0 or x < 100:
+    if not isinstance(x, int) or x < 0 or x > 100:
         err = True
 
-    if not isinstance(y, int) or y < 0 or y < 100:
+    if not isinstance(y, int) or y < 0 or y > 100:
         err = True
 
     return err
@@ -36,6 +36,7 @@ def test_sum(x: Number, y: Number, err: bool):
 
     with pytest.raises(ValueError):
         sum(x, y)
+
 
 
 

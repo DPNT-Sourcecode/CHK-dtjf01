@@ -37,7 +37,12 @@ def test_simple(skus: str, value: int):
     ]
 )
 def test_offers(skus: str, expected: int):
-    assert checkout(skus) == expected
+    # randomly add 'Y' and scramble the input
+    extra = "Y" * random.randint(1, 5)
+    skus = list(skus + extra)
+    random.shuffle(skus)
+
+    assert checkout(skus) == expected + PRICES[extra[0]] * len(extra)
 
 
 @pytest.mark.parametrize(
@@ -94,6 +99,7 @@ def test_offers(skus: str, expected: int):
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 
 
 

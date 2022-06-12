@@ -1,5 +1,7 @@
 import pytest
 
+import random
+
 from solutions.CHK.checkout_solution import (
     checkout, PRICES, OFFERS, SUBS
 )
@@ -19,6 +21,21 @@ def test_simple(skus: str, value: int):
     assert checkout(skus) == value
 
 
+@pytest.mark.parametrize(
+    "skus, expected",
+    [
+        ("AAA", 130),
+        ("AAAAA", 200),
+        ("BB", 45),
+        ("HHHHHHHHHH", 80),
+        ("HHHHH", 45),
+        ("KK", 150),
+        ("PPPPP", 200),
+        ("QQQ", 80),
+        ("VVV", 130),
+        ("VV", 90)
+    ]
+)
 def test_offers(skus: str, expected: int):
     assert checkout(skus) == expected
 
@@ -77,5 +94,6 @@ def test_offers(skus: str, expected: int):
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 
 

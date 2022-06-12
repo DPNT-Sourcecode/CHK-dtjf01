@@ -47,7 +47,7 @@ OFFERS = {
 COMBO_OFFERS = sorted(set(
     "".join(sorted(combo))
     for combo in itertools.combinations_with_replacement("STXYZ", 3)
-))
+), key=lambda c: "X" in c)
 
 
 SUBS = {
@@ -75,7 +75,7 @@ def checkout(skus: str) -> int:
 
     # groups offers, 3 items from set -> 45
     # always favour putting expensive items in the list
-    
+
 
     for k, v in SUBS.items():
         subc = s_skus.count(k)
@@ -90,6 +90,7 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 
 
 

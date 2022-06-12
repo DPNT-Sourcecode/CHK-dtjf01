@@ -31,12 +31,22 @@ PRICES = {
 OFFERS = {
     "AAAAA": 200,
     "AAA": 130,
-    "BB": 45
+    "BB": 45,
+    "H"*10: 80,
+    "H"*5: 45,
+    "KK": 150,
+    "P"*5: 200,
+    "QQQ": 80,
+    "VVV": 130,
+    "VV": 90
 }
 
 SUBS = {
     "EE": "B",
-    "FFF": "F"
+    "FFF": "F",
+    "NNN": "M",
+    "RRR": "Q",
+    "UUUU": "U"
 }
 
 
@@ -67,4 +77,5 @@ def checkout(skus: str) -> int:
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 

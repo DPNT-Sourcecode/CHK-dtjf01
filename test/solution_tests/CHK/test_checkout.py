@@ -61,11 +61,15 @@ from solutions.CHK.checkout_solution import checkout
         ("BBEEBBEE", 160 + 45),
 
         ("FFF", 20),
-        ("FF", 20)
+        ("FF", 20),
+        ("FFFF", 30),
+        ("AFFAAF", 130 + 20),
+        ("AAAFFFBB", 130 + 20 + 45)
     ]
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 
 
 

@@ -46,6 +46,20 @@ def test_offers(skus: str, expected: int):
 
 
 @pytest.mark.parametrize(
+    "skus, expected",
+    [
+        ("EEB", 80),
+        ("FFF", 20),
+        ("NNNM", 120),
+        ("QRRR", 150),
+        ("UUUU", 120),
+    ]
+)
+def test_subs(skus: str, expected: int):
+    assert checkout(skus) == expected
+
+
+@pytest.mark.parametrize(
     "skus,expected",
     [
         (123, -1),
@@ -99,6 +113,7 @@ def test_offers(skus: str, expected: int):
 )
 def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
+
 
 
 

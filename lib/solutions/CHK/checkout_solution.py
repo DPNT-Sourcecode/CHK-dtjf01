@@ -1,4 +1,4 @@
-import itertools
+import math
 
 
 PRICES = {
@@ -84,13 +84,17 @@ def checkout(skus: str) -> int:
 
     # calculate group offers
     for members, grp_len, value in GROUP_OFFERS:
-        # extract group members
+        #  extract group members, sort by desc. price
         s_mem = "".join(sorted(filter(lambda s: s in members, s_skus),
-                               key=lambda s: PRICES[s]))
-
+                               key=lambda s: PRICES[s], reverse=True))
+        s_grps = math.floor(len(s_mem) / grp_len)
+        total += value * s_grps
+        total += sum([PRICES[s] for s in s_mem[s_grps * grp_len:]])
+        s_mem = "".join(filter(lambda s: s not in members))
 
     # calc price of remaining
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 

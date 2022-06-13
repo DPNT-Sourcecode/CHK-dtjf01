@@ -125,9 +125,3 @@ def test_combos_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
-
-
-
-
-
-

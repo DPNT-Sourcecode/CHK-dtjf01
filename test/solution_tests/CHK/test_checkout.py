@@ -7,7 +7,38 @@ from solutions.CHK.checkout_solution import (
 )
 
 
-COMBOS = [
+CASES = [
+    # Empty -> 0
+    ("", 0),
+
+    # offer cases
+    ("AAA", 130),
+    ("AAAAA", 200),
+    ("BB", 45),
+    ("HHHHHHHHHH", 80),
+    ("HHHHH", 45),
+    ("KK", 150),
+    ("PPPPP", 200),
+    ("QQQ", 80),
+    ("VVV", 130),
+    ("VV", 90),
+
+    # Substitute cases
+    ("EEB", 80),
+    ("FFF", 20),
+    ("NNNM", 120),
+    ("QRRR", 150),
+    ("UUUU", 120),
+
+    # Group offer cases
+    ("STX", 45),
+    ("XTS", 45),
+    ("STXX", 45 + 17),
+    ("XXST", 45 + 17),
+    ("YXZS", 45 + 17),
+    ("SXSSS", 45 + 20 + 17),
+
+    # combo cases
     ("AA", 100),
     ("AB", 80),
     ("BC", 50),
@@ -38,7 +69,6 @@ COMBOS = [
     ("P"*5 + "H"*5, 200 + 45),
     ("RRRQQQ", 150 + 60),
 
-
     ("AAASTX", 130 + 45),
     ("STBBZ", 45 + 45),
     ("YYY", 45),
@@ -47,7 +77,7 @@ COMBOS = [
 
 
 @pytest.mark.parametrize(
-    "skus", ["123", 123, "a", "b", "c", "d", "aBC", "ABCd", "ABCa",
+    "skus", [None, "123", 123, "a", "b", "c", "d", "aBC", "ABCd", "ABCa",
              "aABC", "aBcD", "ABCDe"]
 )
 def test_illegals(skus: str):
@@ -62,70 +92,19 @@ def test_simple(skus: str, value: int):
 
 
 @pytest.mark.parametrize(
-    "skus, expected",
-    [
-        ("AAA", 130),
-        ("AAAAA", 200),
-        ("BB", 45),
-        ("HHHHHHHHHH", 80),
-        ("HHHHH", 45),
-        ("KK", 150),
-        ("PPPPP", 200),
-        ("QQQ", 80),
-        ("VVV", 130),
-        ("VV", 90)
-    ]
+    "skus,expected", CASES
 )
-def test_offers(skus: str, expected: int):
-    # randomly add 'D' and scramble the input
-    extra = "D" * random.randint(1, 5)
-    skus = list(skus + extra)
-    random.shuffle(skus)
-
-    assert checkout("".join(skus)) == expected + PRICES[extra[0]] * len(extra)
-
-
-@pytest.mark.parametrize(
-    "skus, expected",
-    [
-        ("EEB", 80),
-        ("FFF", 20),
-        ("NNNM", 120),
-        ("QRRR", 150),
-        ("UUUU", 120),
-    ]
-)
-def test_subs(skus: str, expected: int):
+def test_checkout(skus: str, expected: int):
     assert checkout(skus) == expected
 
 
 @pytest.mark.parametrize(
-    "skus,expected", COMBOS
+    "skus,expected", CASES
 )
-def test_combos(skus: str, expected: int):
-    assert checkout(skus) == expected
-
-
-@pytest.mark.parametrize(
-    "skus,expected", [
-        ("STX", 45),
-        ("XTS", 45),
-        ("STXX", 45 + 17),
-        ("XXST", 45 + 17),
-        ("YXZS", 45 + 17),
-        ("SXSSS", 45 + 20 + 17)
-    ]
-)
-def test_group_offers(skus: str, expected: int):
-    assert checkout(skus) == expected
-
-
-@pytest.mark.parametrize(
-    "skus,expected", COMBOS
-)
-def test_combos_shuffled(skus: str, expected: int):
+def test_checkout_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
+
 
 

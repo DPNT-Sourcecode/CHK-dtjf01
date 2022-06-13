@@ -43,16 +43,6 @@ OFFERS = {
     "VV": 90
 }
 
-# get unique set of group permutations
-COMBO_OFFERS = sorted(set(
-    "".join(sorted(combo))
-    for combo in itertools.combinations_with_replacement("STXYZ", 3)
-), key=lambda c: sum([PRICES[ci] for ci in c]), reverse=True)
-
-
-OFFERS.update(
-    {combo: 45 for combo in COMBO_OFFERS}
-)
 
 SUBS = {
     "EE": "B",
@@ -61,6 +51,10 @@ SUBS = {
     "RRR": "Q",
     "UUUU": "U"
 }
+
+GROUP_OFFERS = [
+    ("STXYZ", 3, 45)
+]
 
 
 # noinspection PyUnusedLocal
@@ -77,16 +71,26 @@ def checkout(skus: str) -> int:
     if any([s not in PRICES for s in s_skus]):
         return -1
 
+    # Substitute BOGOF offers
     for k, v in SUBS.items():
         subc = s_skus.count(k)
         s_skus = s_skus.replace(v, "", subc)
 
     total = 0
+    # calculate combo offers
     for k, v in OFFERS.items():
         total += s_skus.count(k) * v
         s_skus = s_skus.replace(k, "")
+
+    # calculate group offers
+    for members, grp_len, value in GROUP_OFFERS:
+        # extract group members
+        s_mem = "".join(sorted(filter(lambda s: s in members, s_skus),
+                               key=lambda s: PRICES[s]))
+
 
     # calc price of remaining
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+

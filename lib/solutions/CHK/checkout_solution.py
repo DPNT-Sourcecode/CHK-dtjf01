@@ -90,11 +90,12 @@ def checkout(skus: str) -> int:
         s_grps = math.floor(len(s_mem) / grp_len)
         total += value * s_grps
         total += sum([PRICES[s] for s in s_mem[s_grps * grp_len:]])
-        s_mem = "".join(filter(lambda s: s not in members))
+        s_skus = "".join(filter(lambda s: s not in members, s_skus))
 
     # calc price of remaining
     total += sum([PRICES[s] for s in s_skus])
     # return sum of SKU groups
     return total
+
 
 

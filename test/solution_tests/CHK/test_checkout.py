@@ -3,7 +3,7 @@ import pytest
 import random
 
 from solutions.CHK.checkout_solution import (
-    COMBO_OFFERS, checkout, PRICES
+    checkout, PRICES
 )
 
 
@@ -43,11 +43,6 @@ COMBOS = [
     ("STBBZ", 45 + 45),
     ("YYY", 45),
     ("UUUUSXTZ", 120 + 45 + 17)
-]
-
-GROUP_OFFERS = [
-    ("".join(combo), 45)
-    for combo in COMBO_OFFERS
 ]
 
 
@@ -112,7 +107,10 @@ def test_combos(skus: str, expected: int):
 
 
 @pytest.mark.parametrize(
-    "skus,expected", GROUP_OFFERS
+    "skus,expected", [
+        ("STX", 45),
+        ("STXX", 45 + 17)
+    ]
 )
 def test_group_offers(skus: str, expected: int):
     assert checkout(skus) == expected
@@ -125,3 +123,4 @@ def test_combos_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
+

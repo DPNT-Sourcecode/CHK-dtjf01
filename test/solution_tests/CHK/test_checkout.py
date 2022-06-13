@@ -17,7 +17,7 @@ CASES = [
     ("BB", 45),
     ("HHHHHHHHHH", 80),
     ("HHHHH", 45),
-    ("KK", 150),
+    ("KK", 120),
     ("PPPPP", 200),
     ("QQQ", 80),
     ("VVV", 130),
@@ -47,6 +47,8 @@ CASES = [
     ("AAA", 130),
     ("AAAAA", 200),
     ("AAAAAA", 250),
+    ("KKK", 190),
+    ("KKKK", 240),
     ("AAAB", 160),
     ("AAABB", 175),
     ("AAABBAA", 245),
@@ -105,3 +107,4 @@ def test_checkout_shuffled(skus: str, expected: int):
     skus = list(skus)
     random.shuffle(skus)
     assert checkout("".join(skus)) == expected
+
